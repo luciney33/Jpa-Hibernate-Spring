@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "Type")
-@NamedQueries({ @NamedQuery(name = "GET_ALL_TYPES",
-        query = "from JpaTypeEntity") })
 public class JpaTypeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

@@ -1,8 +1,7 @@
 package org.example.jpaspring.dao;
 
-import newspaperoot.dao.hibernate.model.JpaCredentialEntity;
+import org.example.jpaspring.dao.model.JpaCredentialEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-
-public interface CredentialRepository {
-    JpaCredentialEntity get(String username);
+public interface CredentialRepository extends JpaRepository<JpaCredentialEntity, String> {
 }

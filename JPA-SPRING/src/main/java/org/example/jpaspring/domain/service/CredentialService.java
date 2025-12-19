@@ -1,14 +1,11 @@
 package org.example.jpaspring.domain.service;
 
 
-import lombok.Data;
-import newspaperoot.dao.CredentialRepository;
-import newspaperoot.dao.model.CredentialEntity;
-import newspaperoot.domain.model.CredentialDTO;
+import org.example.jpaspring.dao.CredentialRepository;
+import org.example.jpaspring.dao.model.JpaCredentialEntity;
+import org.example.jpaspring.domain.model.CredentialDTO;
 import org.springframework.stereotype.Service;
 
-// llamar al repository pero tambien crea credentiadto a credential normal
-@Data
 @Service
 public class CredentialService {
     private final CredentialRepository credentialRepository;
@@ -18,8 +15,13 @@ public class CredentialService {
     }
 
     public boolean checkLogin(CredentialDTO credentialDTO) {
-        CredentialEntity credentialEntity = credentialRepository.get(credentialDTO.getUsername());
+        JpaCredentialEntity credentialEntity = credentialRepository.findAll().stream()
+                .filter(credential -> credential.getUsername().equals(credentialDTO.getUsername()))
+                .findFirst()
+                .orElse(null);
+        if (credentialEntity == null) {
+            return false;
+        }
         return credentialEntity.getPassword().equals(credentialDTO.getPassword());
-
     }
 }

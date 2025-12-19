@@ -1,15 +1,10 @@
 package org.example.jpaspring.dao;
 
-import newspaperoot.dao.hibernate.model.JpaCredentialEntity;
-import newspaperoot.dao.hibernate.model.JpaReaderEntity;
+import org.example.jpaspring.dao.model.JpaReaderEntity;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ReaderRepository {
-    List<JpaReaderEntity> getAll();
-    JpaReaderEntity get(int id);
-    List<JpaReaderEntity> getAllByArticle(int articleId);
-    int save(JpaReaderEntity reader, JpaCredentialEntity credential, boolean confirmation);
-    boolean delete(JpaReaderEntity reader,  boolean confirmation);
+public interface ReaderRepository extends JpaRepository<JpaReaderEntity, Integer> {
+
 }
 

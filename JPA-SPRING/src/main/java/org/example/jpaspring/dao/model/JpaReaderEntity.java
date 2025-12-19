@@ -12,14 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "Reader")
-@NamedQuery(name = "GET_ALL_READERS",
-        query = Queries.GET_ALL_READERS)
-
-@NamedQuery(name = "GET_ALL_READERS_BY_ARTICLEID",
-        query = Queries.GET_ALL_READERS_BY_ARTICLEID)
-
-@NamedQuery(name = "GET_READER_BYID",
-        query = Queries.GET_READER_BYID)
 public class JpaReaderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

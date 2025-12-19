@@ -1,8 +1,9 @@
 package org.example.jpaspring.ui;
 
 
-import newspaperoot.domain.model.ArticleDTO;
-import newspaperoot.domain.service.ArticleService;
+
+import org.example.jpaspring.domain.model.ArticleDTO;
+import org.example.jpaspring.domain.service.ArticleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +40,6 @@ public class RestArticle {
     @DeleteMapping("/articles/{articleId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteArticle(@PathVariable int articleId, @RequestParam(required = false) boolean confirm) {
-        articleService.deleteArticle(articleId,confirm);
+        articleService.deleteArticle(articleId, confirm);
     }
 }

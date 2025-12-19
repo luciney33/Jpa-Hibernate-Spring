@@ -11,14 +11,6 @@ import org.example.jpaspring.dao.utilities.Queries;
 @NoArgsConstructor
 @Entity
 @Table(name = "ReadArticle")
-@NamedQueries({
-        @NamedQuery(name = "GET_ALL_READARTICLES_BY_ARTICLEID",
-                query = Queries.GET_ALL_READARTICLES_BY_ARTICLEID),
-        @NamedQuery(name = "UPDATE_RATING",
-                query = Queries.UpdateRating),
-        @NamedQuery(name = "DELETE_RATING",
-                query = Queries.DeleteRating)
-})
 public class JpaReadArticleEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

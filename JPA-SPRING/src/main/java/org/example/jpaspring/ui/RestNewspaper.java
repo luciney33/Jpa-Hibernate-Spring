@@ -1,6 +1,6 @@
 package org.example.jpaspring.ui;
-import newspaperoot.domain.model.NewsPaperDTO;
-import newspaperoot.domain.service.NewspaperService;
+import org.example.jpaspring.domain.model.NewsPaperDTO;
+import org.example.jpaspring.domain.service.NewspaperService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

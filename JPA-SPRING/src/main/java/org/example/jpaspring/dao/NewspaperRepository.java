@@ -1,9 +1,8 @@
 package org.example.jpaspring.dao;
 
-import newspaperoot.dao.hibernate.model.JpaNewspaperEntity;
 
-import java.util.List;
+import org.example.jpaspring.dao.model.JpaNewspaperEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface NewspaperRepository {
-    List<JpaNewspaperEntity> getAll();
+public interface NewspaperRepository extends JpaRepository<JpaNewspaperEntity, Integer> {
 }

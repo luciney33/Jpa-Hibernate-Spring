@@ -1,6 +1,6 @@
 package org.example.jpaspring.ui;
-import newspaperoot.domain.model.CredentialDTO;
-import newspaperoot.domain.service.CredentialService;
+import org.example.jpaspring.domain.model.CredentialDTO;
+import org.example.jpaspring.domain.service.CredentialService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

@@ -13,8 +13,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "Newspaper")
-@NamedQuery(name = "GET_ALL_NEWSPAPERS",
-        query = Queries.GET_ALL_NEWSPAPERS)
 public class JpaNewspaperEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

@@ -12,13 +12,6 @@ import org.example.jpaspring.dao.utilities.Queries;
 @NoArgsConstructor
 @Entity
 @Table(name = "Article")
-
-@NamedQueries({
-        @NamedQuery(name = "GET_ALL_ARTICLES",
-        query = Queries.GET_ALL_ARTICLES),
-       @NamedQuery(name = "DELETE_READARTICLE_BY_ARTICLEID", query = Queries.DELETE_READARTICLE_BY_ARTICLEID)
-})
-
 public class JpaArticleEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -34,8 +27,6 @@ public class JpaArticleEntity {
     @ManyToOne
     @JoinColumn (name = "id_type")
     private JpaTypeEntity type;
-
-
 
 }
 

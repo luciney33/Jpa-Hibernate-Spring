@@ -2,14 +2,8 @@ package org.example.jpaspring.dao;
 
 import org.example.jpaspring.dao.model.JpaArticleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
+@Repository
 public interface ArticleRepository extends JpaRepository<JpaArticleEntity, Integer> {
-    List<JpaArticleEntity> getAll();
-    JpaArticleEntity get(int id);
-    int save(JpaArticleEntity article);
-    void delete(JpaArticleEntity article, boolean confirmation);
-    void update(JpaArticleEntity article);
-
 }

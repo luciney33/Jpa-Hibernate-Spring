@@ -1,9 +1,9 @@
 package org.example.jpaspring.dao;
 
-import newspaperoot.dao.hibernate.model.JpaTypeEntity;
+import org.example.jpaspring.dao.model.JpaTypeEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
 
-public interface TypeRepository {
-    List<JpaTypeEntity> getAllTypes();
+
+public interface TypeRepository extends JpaRepository<JpaTypeEntity, Integer> {
 }
