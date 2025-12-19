@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.jpaspring.dao.utilities.Queries;
+
+import java.util.List;
 
 
 @Data
@@ -28,6 +29,7 @@ public class JpaArticleEntity {
     @JoinColumn (name = "id_type")
     private JpaTypeEntity type;
 
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<JpaReadArticleEntity> readArticles;
+
 }
-
-

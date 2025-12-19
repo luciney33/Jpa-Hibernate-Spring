@@ -34,7 +34,7 @@ public class ArticleService {
         List<ArticleDTO> articleDTOs = new ArrayList<>();
 
         articles.forEach(article -> {
-            double avgRating = readerArticleRepository.findAllByIdArticle(article.getId()).stream()
+            double avgRating = readerArticleRepository.findAllByArticle_Id(article.getId()).stream()
                     .mapToInt(JpaReadArticleEntity::getRating)
                     .average()
                     .orElse(0.0);
@@ -61,7 +61,8 @@ public class ArticleService {
                 0,
                 articleDTO.getName(),
                 articleDTO.getNpaperId(),
-                type
+                type,
+                null
         );
 
         JpaArticleEntity saved = articleRepository.save(articleEntity);
@@ -81,20 +82,18 @@ public class ArticleService {
                 articleDTO.getId(),
                 articleDTO.getName(),
                 articleDTO.getNpaperId(),
-                type
+                type,
+                null
         );
 
         articleRepository.save(articleEntity);
     }
 
     public void deleteArticle(int articleId, boolean confirmation) {
-        JpaArticleEntity articleEntity = articleRepository.findById(articleId).orElse(null);
-        if (articleEntity != null) {
-            if (confirmation) {
-                List<JpaReadArticleEntity> readArticles = readerArticleRepository.findAllByIdArticle(articleId);
-                readerArticleRepository.deleteAll(readArticles);
-            }
-            articleRepository.delete(articleEntity);
+        if (confirmation) {
+            JpaArticleEntity article = articleRepository.findById(articleId)
+                    .orElseThrow(() -> new IllegalArgumentException("Artículo no encontrado con id: " + articleId));
+            articleRepository.delete(article);
         }
     }
 }

@@ -12,7 +12,7 @@ public class RestCredential {
         this.credentialService = credentialService;
     }
 
-    @CrossOrigin(origins = "http://127.0.0.1:5500")
+    @CrossOrigin(origins = "*")
     @PostMapping("/login")
     public boolean login(@RequestBody CredentialDTO userCredentialsUI) {
         return credentialService.checkLogin(userCredentialsUI);

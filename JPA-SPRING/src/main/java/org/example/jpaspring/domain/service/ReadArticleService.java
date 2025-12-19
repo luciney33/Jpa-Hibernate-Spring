@@ -35,14 +35,14 @@ public class ReadArticleService {
         JpaReadArticleEntity readArticle = new JpaReadArticleEntity(
                 0,
                 reader,
-                article.getId(),
+                article,
                 dto.getRating()
         );
         JpaReadArticleEntity saved = rActRepository.save(readArticle);
         return saved.getId();
     }
     public ReaderArticleDTO update(ReaderArticleDTO dto) {
-        JpaReadArticleEntity found = rActRepository.findByReaderIdReaderAndIdArticle(
+        JpaReadArticleEntity found = rActRepository.findByReader_IdReaderAndArticle_Id(
                 dto.getIdReader(),
                 dto.getIdArticle()
         ).orElse(null);
@@ -56,7 +56,7 @@ public class ReadArticleService {
     }
 
     public boolean delete(ReaderArticleDTO dto) {
-        JpaReadArticleEntity found = rActRepository.findByReaderIdReaderAndIdArticle(
+        JpaReadArticleEntity found = rActRepository.findByReader_IdReaderAndArticle_Id(
                 dto.getIdReader(),
                 dto.getIdArticle()
         ).orElse(null);

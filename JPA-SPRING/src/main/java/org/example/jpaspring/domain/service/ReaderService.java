@@ -53,7 +53,7 @@ public class ReaderService {
 
 
     public List<ReaderArticleDTO> getReadersByArticle(int articleId) {
-        List<JpaReadArticleEntity> readArticleEntities = readArtRepository.findAllByIdArticle(articleId);
+        List<JpaReadArticleEntity> readArticleEntities = readArtRepository.findAllByArticle_Id(articleId);
         List<ReaderArticleDTO> readArticleDTOS = new ArrayList<>();
 
         for (JpaReadArticleEntity readArticleEntity : readArticleEntities) {
@@ -73,7 +73,7 @@ public class ReaderService {
             }
 
             ReaderArticleDTO dto = new ReaderArticleDTO(
-                    readArticleEntity.getIdArticle(),
+                    readArticleEntity.getId(),
                     reader.getIdReader(),
                     reader.getName(),
                     reader.getBirthDate(),

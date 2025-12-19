@@ -19,8 +19,9 @@ public class JpaReadArticleEntity {
     @JoinColumn(name = "id_reader")
     private JpaReaderEntity reader;
 
-    @Column(name = "id_article")
-    private int idArticle;
+    @ManyToOne
+    @JoinColumn(name = "id_article")
+    private JpaArticleEntity article;
 
     @Column
     private int rating;

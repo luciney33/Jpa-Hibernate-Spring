@@ -16,7 +16,7 @@ public class RestNewspaper {
         this.newspaperService = newspaperService;
     }
 
-    @CrossOrigin(origins = "http://127.0.0.1:5500")
+    @CrossOrigin(origins = "*")
     @GetMapping("/newspapers")
     public List<NewsPaperDTO> getAll() {
         return newspaperService.getAllNewspapers();

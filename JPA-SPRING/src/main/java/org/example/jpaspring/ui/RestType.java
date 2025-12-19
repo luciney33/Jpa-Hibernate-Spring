@@ -14,7 +14,7 @@ public class RestType {
         this.typeService = typeService;
     }
 
-    @CrossOrigin(origins = "http://127.0.0.1:5500")
+    @CrossOrigin(origins = "*")
     @GetMapping("/types")
     public List<TypeDTO> getAll() {
         return typeService.getAllTypes();
