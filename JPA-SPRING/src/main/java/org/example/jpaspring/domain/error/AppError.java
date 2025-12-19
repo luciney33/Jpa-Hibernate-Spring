@@ -1,6 +1,7 @@
 package org.example.jpaspring.domain.error;
 
-import newspaperoot.common.Constantes;
+
+import org.example.jpaspring.common.Constantes;
 
 public class AppError extends RuntimeException {
     public AppError(String message) {
