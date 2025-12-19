@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.jpaspring.dao.utilities.Queries;
 
 @Data
 @AllArgsConstructor
@@ -20,8 +19,8 @@ public class JpaReadArticleEntity {
     @JoinColumn(name = "id_reader")
     private JpaReaderEntity reader;
 
-    @Column
-    private int id_article;
+    @Column(name = "id_article")
+    private int idArticle;
 
     @Column
     private int rating;

@@ -10,8 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface ReaderArticleRepository extends JpaRepository<JpaReadArticleEntity, Integer> {
-    List<JpaReadArticleEntity> findAllById_article(int id_article);
+    List<JpaReadArticleEntity> findAllByIdArticle(int idArticle);
 
-    // Buscar por reader y article
-    Optional<JpaReadArticleEntity> findByReader_Id_readerAndId_article(int id_reader, int id_article);
+    Optional<JpaReadArticleEntity> findByReaderIdReaderAndIdArticle(int idReader, int idArticle);
 }

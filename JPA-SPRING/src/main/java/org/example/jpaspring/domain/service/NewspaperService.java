@@ -3,7 +3,6 @@ package org.example.jpaspring.domain.service;
 import lombok.Data;
 import org.example.jpaspring.dao.NewspaperRepository;
 import org.example.jpaspring.dao.model.JpaNewspaperEntity;
-import org.example.jpaspring.domain.mappers.MapNewsDtoEntity;
 import org.example.jpaspring.domain.model.NewsPaperDTO;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +13,9 @@ import java.util.List;
 @Service
 public class NewspaperService {
     private final NewspaperRepository newspaperRepository;
-    private final MapNewsDtoEntity mapper;
 
-    public NewspaperService(NewspaperRepository newspaperRepository, MapNewsDtoEntity mapper) {
+    public NewspaperService(NewspaperRepository newspaperRepository) {
         this.newspaperRepository = newspaperRepository;
-        this.mapper = mapper;
     }
 
     public List<NewsPaperDTO> getAllNewspapers() {

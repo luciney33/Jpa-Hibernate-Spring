@@ -41,9 +41,8 @@ public class ReadArticleService {
         JpaReadArticleEntity saved = rActRepository.save(readArticle);
         return saved.getId();
     }
-
     public ReaderArticleDTO update(ReaderArticleDTO dto) {
-        JpaReadArticleEntity found = rActRepository.findByReader_Id_readerAndId_article(
+        JpaReadArticleEntity found = rActRepository.findByReaderIdReaderAndIdArticle(
                 dto.getIdReader(),
                 dto.getIdArticle()
         ).orElse(null);
@@ -55,8 +54,9 @@ public class ReadArticleService {
         }
         throw new RuntimeException("Rating not found for readerID: " + dto.getIdReader() + " and articleID: " + dto.getIdArticle());
     }
+
     public boolean delete(ReaderArticleDTO dto) {
-        JpaReadArticleEntity found = rActRepository.findByReader_Id_readerAndId_article(
+        JpaReadArticleEntity found = rActRepository.findByReaderIdReaderAndIdArticle(
                 dto.getIdReader(),
                 dto.getIdArticle()
         ).orElse(null);

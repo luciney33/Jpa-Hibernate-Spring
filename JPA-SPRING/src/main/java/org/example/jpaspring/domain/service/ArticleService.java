@@ -6,7 +6,6 @@ import org.example.jpaspring.dao.ReaderArticleRepository;
 import org.example.jpaspring.dao.model.JpaArticleEntity;
 import org.example.jpaspring.dao.model.JpaReadArticleEntity;
 import org.example.jpaspring.dao.model.JpaTypeEntity;
-import org.example.jpaspring.domain.mappers.MapArticleDtoEntity;
 import org.example.jpaspring.domain.model.ArticleDTO;
 import org.example.jpaspring.domain.model.TypeDTO;
 import org.springframework.stereotype.Service;
@@ -23,12 +22,10 @@ import java.util.List;
 public class ArticleService {
     private final ReaderArticleRepository readerArticleRepository;
     private final ArticleRepository articleRepository;
-    private final MapArticleDtoEntity mapper;
 
-    public ArticleService(ReaderArticleRepository readerArticleRepository, ArticleRepository articleRepository, MapArticleDtoEntity mapper ) {
+    public ArticleService(ReaderArticleRepository readerArticleRepository, ArticleRepository articleRepository ) {
         this.readerArticleRepository = readerArticleRepository;
         this.articleRepository = articleRepository;
-        this.mapper = mapper;
     }
 
 
@@ -37,7 +34,7 @@ public class ArticleService {
         List<ArticleDTO> articleDTOs = new ArrayList<>();
 
         articles.forEach(article -> {
-            double avgRating = readerArticleRepository.findAllById_article(article.getId()).stream()
+            double avgRating = readerArticleRepository.findAllByIdArticle(article.getId()).stream()
                     .mapToInt(JpaReadArticleEntity::getRating)
                     .average()
                     .orElse(0.0);
@@ -94,7 +91,7 @@ public class ArticleService {
         JpaArticleEntity articleEntity = articleRepository.findById(articleId).orElse(null);
         if (articleEntity != null) {
             if (confirmation) {
-                List<JpaReadArticleEntity> readArticles = readerArticleRepository.findAllById_article(articleId);
+                List<JpaReadArticleEntity> readArticles = readerArticleRepository.findAllByIdArticle(articleId);
                 readerArticleRepository.deleteAll(readArticles);
             }
             articleRepository.delete(articleEntity);

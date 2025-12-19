@@ -1,7 +1,7 @@
 package org.example.jpaspring.ui.error;
 
-import newspaperoot.domain.error.DUPLICATED_USERNAME;
-import newspaperoot.domain.error.FOREIGN_KEY_ERROR;
+import org.example.jpaspring.domain.error.DUPLICATED_USERNAME;
+import org.example.jpaspring.domain.error.FOREIGN_KEY_ERROR;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
