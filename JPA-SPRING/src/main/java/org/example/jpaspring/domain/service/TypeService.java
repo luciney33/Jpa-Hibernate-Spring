@@ -1,10 +1,6 @@
 package org.example.jpaspring.domain.service;
 
 import lombok.Data;
-import newspaperoot.dao.TypeRepository;
-import newspaperoot.dao.model.TypeEntity;
-import newspaperoot.domain.mappers.MapTypeDtoEntity;
-import newspaperoot.domain.model.TypeDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

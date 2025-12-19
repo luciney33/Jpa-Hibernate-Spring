@@ -7,12 +7,9 @@ import org.example.jpaspring.dao.ReaderRepository;
 import org.example.jpaspring.dao.model.JpaArticleEntity;
 import org.example.jpaspring.dao.model.JpaReadArticleEntity;
 import org.example.jpaspring.dao.model.JpaReaderEntity;
-import org.example.jpaspring.domain.mappers.MapReadArticleDtoEntity;
 import org.example.jpaspring.domain.model.ReaderArticleDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional
@@ -20,13 +17,11 @@ public class ReadArticleService {
     private final ReaderArticleRepository rActRepository;
     private final ArticleRepository articleRepository;
     private final ReaderRepository readerRepository;
-    private final MapReadArticleDtoEntity mapper;
 
-    public ReadArticleService(ReaderArticleRepository rActRepository, ArticleRepository articleRepository, ReaderRepository readerRepository, MapReadArticleDtoEntity mapper) {
+    public ReadArticleService(ReaderArticleRepository rActRepository, ArticleRepository articleRepository, ReaderRepository readerRepository) {
         this.rActRepository = rActRepository;
         this.articleRepository = articleRepository;
         this.readerRepository = readerRepository;
-        this.mapper = mapper;
     }
 
     public int add(ReaderArticleDTO dto) {
@@ -48,25 +43,28 @@ public class ReadArticleService {
     }
 
     public ReaderArticleDTO update(ReaderArticleDTO dto) {
-        List<JpaReadArticleEntity> allReadArticles = rActRepository.findAll();
-        JpaReadArticleEntity found = allReadArticles.stream()
-                .filter(ra -> ra.getReader() != null && ra.getReader().getId_reader() == dto.getIdReader())
-                .filter(ra -> ra.getId_article() != null && ra.getId_article() == dto.getIdArticle())
-                .findFirst()
-                .orElse(null);
+        JpaReadArticleEntity found = rActRepository.findByReader_Id_readerAndId_article(
+                dto.getIdReader(),
+                dto.getIdArticle()
+        ).orElse(null);
 
         if (found != null) {
-            found.setValue(readArticleDTO.getRating());
-            readArticleRepository.save(found);
-            return found.getId();
+            found.setRating(dto.getRating());
+            rActRepository.save(found);
+            return dto;
         }
-        throw new RuntimeException("Rating not found for readerID: " + readArticleDTO.getIdReader() + " and articleID: " + readArticleDTO.getIdArticle());
+        throw new RuntimeException("Rating not found for readerID: " + dto.getIdReader() + " and articleID: " + dto.getIdArticle());
     }
-    rActRepository.update(entity);
-        return dto;
-    }
-    public boolean delete(ReaderArticleDTO readerArticleDTO) {
-        ReadArticleEntity entity = mapper.dtoToEntity(readerArticleDTO);
-        return rActRepository.delete(entity);
+    public boolean delete(ReaderArticleDTO dto) {
+        JpaReadArticleEntity found = rActRepository.findByReader_Id_readerAndId_article(
+                dto.getIdReader(),
+                dto.getIdArticle()
+        ).orElse(null);
+
+        if (found != null) {
+            rActRepository.delete(found);
+            return true;
+        }
+        return false;
     }
 }

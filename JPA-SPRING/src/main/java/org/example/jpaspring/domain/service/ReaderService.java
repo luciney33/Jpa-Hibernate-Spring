@@ -1,22 +1,5 @@
 package org.example.jpaspring.domain.service;
 import lombok.Data;
-import newspaperoot.dao.ArticleRepository;
-import newspaperoot.dao.NewspaperRepository;
-import newspaperoot.dao.ReaderArticleRepository;
-import newspaperoot.dao.ReaderRepository;
-import newspaperoot.dao.model.CredentialEntity;
-import newspaperoot.dao.model.NewspaperEntity;
-import newspaperoot.dao.model.ReadArticleEntity;
-import newspaperoot.dao.model.ReaderEntity;
-import newspaperoot.dao.model.xml.CredentialEntityXML;
-import newspaperoot.dao.model.xml.ReaderEntityXML;
-import newspaperoot.dao.xml.XmlReaderRepository;
-import newspaperoot.dao.xml.mappers.ReaderXMLMapper;
-import newspaperoot.domain.mappers.MapReadArticleDtoEntity;
-import newspaperoot.domain.mappers.MapReaderDtoEntity;
-import newspaperoot.domain.model.CredentialDTO;
-import newspaperoot.domain.model.ReaderArticleDTO;
-import newspaperoot.domain.model.ReaderDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
