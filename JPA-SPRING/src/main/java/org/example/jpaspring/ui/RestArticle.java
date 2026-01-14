@@ -36,7 +36,7 @@ public class RestArticle {
 
     @DeleteMapping("/articles/{articleId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteArticle(@PathVariable int articleId, @RequestParam(defaultValue = "true") boolean confirm) {
-        articleService.deleteArticle(articleId, confirm);
+    public void deleteArticle(@PathVariable int articleId) {
+        articleService.deleteArticle(articleId);
     }
 }

@@ -29,7 +29,7 @@ public class JpaArticleEntity {
     @JoinColumn (name = "id_type")
     private JpaTypeEntity type;
 
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "article", fetch = FetchType.LAZY)
     private List<JpaReadArticleEntity> readArticles;
 
 }

@@ -6,8 +6,10 @@ import org.example.jpaspring.dao.ReaderArticleRepository;
 import org.example.jpaspring.dao.model.JpaArticleEntity;
 import org.example.jpaspring.dao.model.JpaReadArticleEntity;
 import org.example.jpaspring.dao.model.JpaTypeEntity;
+import org.example.jpaspring.domain.error.FOREIGN_KEY_ERROR;
 import org.example.jpaspring.domain.model.ArticleDTO;
 import org.example.jpaspring.domain.model.TypeDTO;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -89,11 +91,19 @@ public class ArticleService {
         articleRepository.save(articleEntity);
     }
 
-    public void deleteArticle(int articleId, boolean confirmation) {
-        if (confirmation) {
+    public void deleteArticle(int articleId) {
+        try {
+            List<JpaReadArticleEntity> readArticles = readerArticleRepository.findAllByArticle_Id(articleId);
+
+            if (!readArticles.isEmpty()) {
+                readerArticleRepository.deleteAll(readArticles);
+            }
+
             JpaArticleEntity article = articleRepository.findById(articleId)
                     .orElseThrow(() -> new IllegalArgumentException("Artículo no encontrado con id: " + articleId));
             articleRepository.delete(article);
+        }catch (DataIntegrityViolationException e){
+            throw new FOREIGN_KEY_ERROR();
         }
     }
 }
