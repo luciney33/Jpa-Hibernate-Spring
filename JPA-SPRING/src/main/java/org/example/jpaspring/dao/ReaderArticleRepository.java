@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface ReaderArticleRepository extends JpaRepository<JpaReadArticleEntity, Integer> {
     List<JpaReadArticleEntity> findAllByArticle_Id(int idArticle);
-
+//    JpaReadArticleEntity getByArticle(int idArticle);
     Optional<JpaReadArticleEntity> findByReader_IdReaderAndArticle_Id(int idReader, int idArticle);
 }
