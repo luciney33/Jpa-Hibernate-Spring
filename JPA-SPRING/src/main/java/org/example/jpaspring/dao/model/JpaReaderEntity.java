@@ -27,4 +27,7 @@ public class JpaReaderEntity {
     @JoinColumn(name = "id_reader")
     private List<JpaSubscribeEntity> subscriptionsReader;
 
+    @OneToMany(mappedBy = "reader", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<JpaReadArticleEntity> readArticles;
+
 }

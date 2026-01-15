@@ -42,10 +42,10 @@ public class ReadArticleService {
         return saved.getId();
     }
     public ReaderArticleDTO update(ReaderArticleDTO dto) {
-        JpaReadArticleEntity found = rActRepository.findByReader_IdReaderAndArticle_Id(
-                dto.getIdReader(),
-                dto.getIdArticle()
-        ).orElse(null);
+        JpaReadArticleEntity found = rActRepository.getByArticle_IdAndReader_IdReader(
+                dto.getIdArticle(),
+                dto.getIdReader()
+        );
 
         if (found != null) {
             found.setRating(dto.getRating());
@@ -56,10 +56,10 @@ public class ReadArticleService {
     }
 
     public boolean delete(ReaderArticleDTO dto) {
-        JpaReadArticleEntity found = rActRepository.findByReader_IdReaderAndArticle_Id(
-                dto.getIdReader(),
-                dto.getIdArticle()
-        ).orElse(null);
+        JpaReadArticleEntity found = rActRepository.getByArticle_IdAndReader_IdReader(
+                dto.getIdArticle(),
+                dto.getIdReader()
+        );
 
         if (found != null) {
             rActRepository.delete(found);
