@@ -4,10 +4,8 @@ import org.example.jpaspring.dao.ArticleRepository;
 import org.example.jpaspring.dao.NewspaperRepository;
 import org.example.jpaspring.dao.ReaderArticleRepository;
 import org.example.jpaspring.dao.ReaderRepository;
-import org.example.jpaspring.dao.model.JpaCredentialEntity;
 import org.example.jpaspring.dao.model.JpaReadArticleEntity;
 import org.example.jpaspring.dao.model.JpaReaderEntity;
-import org.example.jpaspring.domain.model.CredentialDTO;
 import org.example.jpaspring.domain.model.ReaderArticleDTO;
 import org.example.jpaspring.domain.model.ReaderDTO;
 import org.springframework.stereotype.Service;
@@ -87,30 +85,4 @@ public class ReaderService {
 
         return readArticleDTOS;
     }
-
-
-    public int saveReader(ReaderDTO readerDTO, CredentialDTO credentialDTO) {
-        JpaReaderEntity readerEntity = new JpaReaderEntity();
-        readerEntity.setName(readerDTO.getNameReader());
-        readerEntity.setBirthDate(readerDTO.getDobReader());
-
-        JpaCredentialEntity credentialEntity = new JpaCredentialEntity();
-        credentialEntity.setUsername(credentialDTO.getUsername());
-        credentialEntity.setPassword(credentialDTO.getPassword());
-        credentialEntity.setReaderId(readerEntity);
-
-        credentialEntity.setReaderId(readerEntity);
-
-        JpaReaderEntity saved = readerRepository.save(readerEntity);
-        return saved.getIdReader();
-    }
-    public void deleteReader(int id, boolean confirmation) {
-        JpaReaderEntity readerEntity = readerRepository.findById(id).orElse(null);
-        if (readerEntity != null) {
-            readerRepository.delete(readerEntity);
-        } else {
-            System.err.println("The reader with id " + id + " does not exist.");
-        }
-    }
-
 }
