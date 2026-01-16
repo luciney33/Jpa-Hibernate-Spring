@@ -35,10 +35,8 @@ public class ArticleService {
         List<ArticleDTO> articleDTOs = new ArrayList<>();
 
         articles.forEach(article -> {
-            double avgRating = readerArticleRepository.findAllByArticle_Id(article.getId()).stream()
-                    .mapToInt(JpaReadArticleEntity::getRating)
-                    .average()
-                    .orElse(0.0);
+            Double avgRatingDouble = readerArticleRepository.getAvgRatingByArticle_Id(article.getId());
+            double avgRating = avgRatingDouble != null ? avgRatingDouble : 0.0;
 
             TypeDTO typeDTO = article.getType() != null
                     ? new TypeDTO(article.getType().getId(), article.getType().getDescription())
