@@ -9,12 +9,12 @@ import org.example.jpaspring.dao.model.JpaTypeEntity;
 import org.example.jpaspring.domain.error.FOREIGN_KEY_ERROR;
 import org.example.jpaspring.domain.model.ArticleDTO;
 import org.example.jpaspring.domain.model.TypeDTO;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 @Data
@@ -77,29 +77,37 @@ public class ArticleService {
             throw new IllegalArgumentException("El artículo debe tener un tipo seleccionado");
         }
 
+        JpaArticleEntity articleEntity = articleRepository.findById(articleDTO.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Artículo no encontrado"));
+
         JpaTypeEntity type = new JpaTypeEntity(typeDTO.getId(), typeDTO.getName(), null);
 
-        JpaArticleEntity articleEntity = new JpaArticleEntity(
-                articleDTO.getId(),
-                articleDTO.getName(),
-                articleDTO.getNpaperId(),
-                type,
-                null
-        );
+        articleEntity.setName(articleDTO.getName());
+        articleEntity.setNPaperId(articleDTO.getNpaperId());
+        articleEntity.setType(type);
 
         articleRepository.save(articleEntity);
     }
 
-    public void deleteArticle(int articleId) {
-        JpaArticleEntity article = articleRepository.findById(articleId)
-                .orElseThrow(() -> new IllegalArgumentException("Artículo no encontrado"));
+    @Transactional
+    public void deleteArticle(int articleId, boolean confirm) {
+        try {
+            JpaArticleEntity article = articleRepository.findById(articleId)
+                    .orElseThrow(() -> new IllegalArgumentException("Artículo no encontrado"));
 
-        List<JpaReadArticleEntity> readArticles = readerArticleRepository.findAllByArticle_Id(articleId);
+            List<JpaReadArticleEntity> readArticles = readerArticleRepository.findAllByArticle_Id(articleId);
 
-        if (!readArticles.isEmpty()) {
+            if (!readArticles.isEmpty()) {
+                if (confirm) {
+                    readerArticleRepository.deleteAll(readArticles);
+                } else {
+                    throw new FOREIGN_KEY_ERROR();
+                }
+            }
+
+            articleRepository.delete(article);
+        } catch (DataIntegrityViolationException e) {
             throw new FOREIGN_KEY_ERROR();
         }
-
-        articleRepository.delete(article);
     }
 }
